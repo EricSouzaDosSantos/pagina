@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="arquivos/Arquivo.css/arquivo.css" media="screen" />
+    <title>Jogo da Velha</title>
+</head>
+<body>
+<h1>level 3</h1>
+<div class="grid">
+    <p>a imagem que corresponde ao (x) é o jake e a que corresponde a (o) é o mago</p>
+    <div class="row">
+        <div class="cell"><img src="arquivos/Arquivo.css/imagens/1.jpg" alt=""></div>
+        <div class="cell"><img src="arquivos/Arquivo.css/imagens/1.jpg" alt=""></div>
+        <div class="cell"><img src="arquivos/Arquivo.css/imagens/1.jpg" alt=""></div>
+    </div>
+    <div class="row">
+        <div class="cell"><img src="arquivos/Arquivo.css/imagens/1.jpg" alt=""></div>
+        <div class="cell"><img src="arquivos/Arquivo.css/imagens/2.jpg" alt=""></div>
+        <div class="cell"><img src="arquivos/Arquivo.css/imagens/2.jpg" alt=""></div>
+    </div>
+    <div class="row">
+        <div class="cell"><img src="arquivos/Arquivo.css/imagens/2.jpg" alt=""></div>
+        <div class="cell"><img src="arquivos/Arquivo.css/imagens/2.jpg" alt=""></div>
+        <div class="cell"><img src="arquivos/Arquivo.css/imagens/2.jpg" alt=""></div>
+    </div>
+</div>
+<button id="sortear">Sortear</button>
+<div id="mensagem"></div>
+<button id="proximaPagina" style="display: none;">Ir para a próxima página</button>
+<script>
+    const cells = document.querySelectorAll('.cell img');
+    const sortearButton = document.getElementById('sortear');
+    const mensagem = document.getElementById('mensagem');
+    const proximaPaginaButton = document.getElementById('proximaPagina');
+
+    const rows = [
+        [cells[0], cells[1], cells[2]],
+        [cells[3], cells[4], cells[5]],
+        [cells[6], cells[7], cells[8]]
+    ];
+
+    const cols = [
+        [cells[0], cells[3], cells[6]],
+        [cells[1], cells[4], cells[7]],
+        [cells[2], cells[5], cells[8]]
+    ];
+
+    cells.forEach(cell => {
+        cell.addEventListener('click', () => {
+            if (cell.src.endsWith('arquivos/Arquivo.css/imagens/1.jpg') || cell.src.endsWith('arquivos/Arquivo.css/imagens/2.jpg')) {
+                cell.src = 'arquivos/Arquivo.css/imagens/2.jpg'; // Troque para 'o.jpg' para alternar entre 'x' e 'o'
+                verificarAcertos();
+            }
+        });
+    });
+
+    sortearButton.addEventListener('click', () => {
+        cells.forEach(cell => {
+            const randomIndex = Math.floor(Math.random() * 2) + 1; // 1 ou 2
+            const randomImage = `arquivos/Arquivo.css/imagens/${randomIndex}.jpg`;
+            cell.src = randomImage;
+        });
+        mensagem.textContent = '';
+        proximaPaginaButton.style.display = 'none';
+    });
+
+    function verificarAcertos() {
+        let venceu = false;
+
+        for (const row of rows) {
+            if (row.every(cell => cell.src.endsWith('arquivos/Arquivo.css/imagens/1.jpg')) ||
+                row.every(cell => cell.src.endsWith('arquivos/Arquivo.css/imagens/2.jpg'))) {
+                venceu = true;
+                break;
+            }
+        }
+
+        if (!venceu) {
+            for (const col of cols) {
+                if (col.every(cell => cell.src.endsWith('arquivos/Arquivo.css/imagens/1.jpg')) ||
+                    col.every(cell => cell.src.endsWith('arquivos/Arquivo.css/imagens/2.jpg'))) {
+                    venceu = true;
+                    break;
+                }
+            }
+        }
+
+        if (venceu) {
+            mensagem.textContent = 'Você venceu!';
+            proximaPaginaButton.style.display = 'block';
+        }
+    }
+</script>
+</body>
+</html>
+

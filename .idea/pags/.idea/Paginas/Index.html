@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dado maluco</title>
+    <link rel="stylesheet" type="text/css" href="arquivos/Arquivo.css/arquico.css" media="screen" />
+</head>
+<body>
+<h1>level 1</h1>
+<h1>Acerte os 3 dados e vá para a oi proxima pagina</h1>
+<button id="btn" onclick="lop()">jogar dados</button>
+<div id="div1" class="div caixa"></div>
+
+<p id="valor"></p>
+
+<br>
+
+<div id="div2" class="div caixa"></div>
+<p id="valor1"></p>
+
+<br>
+
+<div id="div3" class="div caixa"></div>
+<p id="valor2"></p>
+    <br>
+<br>
+<p id="text"></p>
+    <br>
+    <button id="meuBotao" ><a href='http://localhost:63342/pag/.idea/Paginas/megaCena.html?_ijt=5nedo3oa5hafvntl65s4mubooj&_ij_reload=RELOAD_ON_SAVE'>proxima pagina</a></button>
+<script>
+
+
+
+        function lop() {
+            var valor = Math.floor((Math.random() * 6) + 1);
+             var valor1 = Math.floor((Math.random() * 6) + 1);
+              var valor2 = Math.floor((Math.random() * 6) + 1);
+            var foto = document.getElementById("div1");
+            var foto1= document.getElementById("div2");
+            var foto2=document.getElementById("div3");
+            foto1.className = "div caixa" + valor1;
+            foto.className = "div caixa" + valor;
+            foto2.className="dic caixa" + valor2
+            document.getElementById("valor").innerHTML = "Valor: " + valor;
+            document.getElementById("valor1").innerHTML = "Valor: " + valor1;
+            document.getElementById("valor2").innerHTML = "Valor: " + valor2;
+            var botao = document.getElementById("meuBotao");
+            var texto = document.getElementById('text');
+
+
+
+            if((valor==valor1)&&(valor1==valor2)&&(valor2==valor)){
+               document.getElementById('text').innerHTML="Parabéns você consegui!!"
+               botao.style.display = "block";
+               texto.style.display = "block";
+            }
+            else {
+        botao.style.display = "none";
+        texto.style.display = "none";
+        }
+        }
+    </script>
+</body>
+</html>
